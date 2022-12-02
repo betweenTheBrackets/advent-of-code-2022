@@ -85,9 +85,9 @@ async function main() {
     let myScore = 0;
 
     for await (const line of rl) {
-        const [opponentPick, myPick] = line.split(" ");
+        const [opponentPick, requiredOutcome] = line.split(" ");
 
-        const outcome = getOutcome(opponentPick, myPick);
+        const outcome = getOutcome(opponentPick, requiredOutcome);
         opponentScore += outcome.opponentScore;
         myScore += outcome.myScore;
     }
