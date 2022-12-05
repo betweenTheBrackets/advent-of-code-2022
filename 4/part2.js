@@ -11,7 +11,7 @@ async function main() {
         crlfDelay: Infinity,
     });
 
-    let fullyContainsCount = 0;
+    let overlapCount = 0;
 
     for await (const line of rl) {
         const [elf1, elf2] = line.split(',');
@@ -24,21 +24,21 @@ async function main() {
 
         if (elf1Min <= elf2Min && elf2Min <= elf1Max) {
             // elf2's min overlaps elf1's work
-            fullyContainsCount++;
+            overlapCount++;
         }
         else if (elf1Min <= elf2Max && elf2Max <= elf1Max) {
             // elf2's max overlaps elf1's work
-            fullyContainsCount++;
+            overlapCount++;
         }
         else if (elf2Min <= elf1Min && elf1Min <= elf2Max) {
             // elf1's min overlaps elf2's work
-            fullyContainsCount++;
+            overlapCount++;
         }
         else if (elf2Min <= elf1Max && elf1Max <= elf2Max) {
             // elf1's max overlaps elf2's work
-            fullyContainsCount++;
+            overlapCount++;
         }
     }
 
-    console.log(`count of pairs that have overlapping work: ${fullyContainsCount}`);
+    console.log(`count of pairs that have overlapping work: ${overlapCount}`);
 }
