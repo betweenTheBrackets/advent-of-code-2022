@@ -1,6 +1,6 @@
 const fs = require("node:fs");
 const readline = require("node:readline");
-const itemPriorities = require('./itemPriorities');
+const itemPriorities = require("./itemPriorities");
 
 main();
 
@@ -16,10 +16,10 @@ async function main() {
 
     for await (const line of rl) {
         const length = line.length;
-        const firstHalf = line.substring(0, length / 2);
-        const secondHalf = line.substring(length / 2);
+        const firstHalf = new Set(line.substring(0, length / 2));
+        const secondHalf = new Set(line.substring(length / 2));
 
-        const commonItems = getCommonItems(firstHalf, secondHalf, length / 2);
+        const commonItems = Array.from(new Set([...firstHalf].filter((x) => secondHalf.has(x))));
 
         if (commonItems.length > 0) {
             for (let i = 0; i < commonItems.length; i++) {
@@ -29,18 +29,4 @@ async function main() {
     }
 
     console.log(`sum of priorities: ${sumOfPriorities}`);
-}
-
-function getCommonItems(first, second, length) {
-    const items = new Set();
-
-    for (let i = 0; i < length; i++) {
-        for (let j = 0; j < length; j++) {
-            if (first[i] === second[j]) {
-                items.add(first[i]);
-            }
-        }
-    }
-
-    return Array.from(items);
 }
