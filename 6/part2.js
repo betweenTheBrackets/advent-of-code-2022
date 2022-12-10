@@ -26,7 +26,10 @@ async function main() {
             marker.add(line[currentPosition - 3]);
 
             if (Array.from(marker).length === 4) {
-                console.log("start-of-packet marker position: ", currentPosition + 1);
+                console.log(
+                    "start-of-packet marker position: ",
+                    currentPosition + 1
+                );
                 currentPosition = 0;
                 break;
             }
@@ -54,7 +57,10 @@ async function main() {
             marker.add(line[currentPosition - 13]);
 
             if (Array.from(marker).length === 14) {
-                console.log("start-of-message marker position: ", currentPosition + 1);
+                console.log(
+                    "start-of-message marker position: ",
+                    currentPosition + 1
+                );
                 currentPosition += messageLength;
                 break;
             }
